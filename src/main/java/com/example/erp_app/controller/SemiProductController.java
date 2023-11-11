@@ -17,7 +17,6 @@ public class SemiProductController {
 
     private final SemiProductService semiProductService;
 
-    @CrossOrigin
     @GetMapping("/semiProducts")
     public ResponseEntity<List<SemiProduct>> getSemiProducts(){
 
@@ -25,7 +24,7 @@ public class SemiProductController {
 //        return semiProductService.getSemiProducts();
     }
 
-    @CrossOrigin
+
     @RequestMapping(value="/addSemiProduct", method = RequestMethod.POST)
     public ResponseEntity<HashMap<String, String>> addSemiProduct(@RequestBody SemiProductDto semiProductData){
         HashMap<String,String> response = new HashMap<>();

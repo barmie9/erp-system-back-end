@@ -23,11 +23,13 @@ public class Order {
 
     // Do sprawdzenia:
     @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+//    @OneToOne
     @JoinColumn(name = "order_manager_id")
     private User user;
 //    Long orderManagerId;
 
     @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+//    @OneToOne
     @JoinColumn(name = "company_order_id")
     private CompanyOrder companyOrder;
 //    private Long companyOrderId;

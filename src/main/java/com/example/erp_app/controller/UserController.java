@@ -14,7 +14,7 @@ public class UserController {
     private final UserService userService;
 
 
-    @CrossOrigin
+
     @PostMapping("/api/auth/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest){
 
@@ -22,7 +22,7 @@ public class UserController {
 
     }
 
-    @CrossOrigin
+
     @PostMapping("/api/auth/login")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody LoginRequest loginRequest){
         return ResponseEntity.ok(userService.login(loginRequest));

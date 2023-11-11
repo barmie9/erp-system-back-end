@@ -17,7 +17,6 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @CrossOrigin
     @RequestMapping( value = "/orders" , method = RequestMethod.GET)
     public ResponseEntity<List<OrderDto>> getOrders(){
         List<Order> orders = orderService.getOrders();

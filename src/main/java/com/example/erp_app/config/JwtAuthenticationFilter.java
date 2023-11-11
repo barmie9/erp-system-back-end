@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwtToken = authHeader.substring(7); // Pobranie wartości tekstowej zaczynając od pozycji nr 7
         userName = jwtService.extractUsername(jwtToken);
 
+
         if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null) { //Sprawdzenie czy użytkownik nie jest aktualnie uwierzytelniony
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
 
