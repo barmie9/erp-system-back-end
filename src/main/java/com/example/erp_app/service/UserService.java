@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +44,7 @@ public class UserService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .role(user.getRole().name())
                 .build();
 
     }
@@ -63,6 +63,7 @@ public class UserService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .role(user.getRole().name())
                 .build();
     }
 }

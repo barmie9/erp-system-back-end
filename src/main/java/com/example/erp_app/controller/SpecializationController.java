@@ -18,7 +18,7 @@ public class SpecializationController {
     private final SpecializationService specializationService;
 
 
-    @RequestMapping(value = "/specializations", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/auth/specializations", method = RequestMethod.GET)
     ResponseEntity<List<Specialization>> getSpecializations (){
         return ResponseEntity.status(HttpStatus.OK).body(specializationService.getSpecializations());
     }
