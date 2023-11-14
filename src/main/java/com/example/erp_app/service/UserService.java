@@ -53,6 +53,7 @@ public class UserService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole().name())
+                .userId(user.getId())
                 .build();
 
     }
@@ -72,6 +73,7 @@ public class UserService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole().name())
+                .userId(user.getId())
                 .build();
     }
 

@@ -1,23 +1,23 @@
 package com.example.erp_app.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Builder
-public class OrderDto {
-    private Long id;
+@AllArgsConstructor
+@NoArgsConstructor
+public class AddOrderRequest {
     private String name;
     private Long quantity;
-    private String createDate;
+    private LocalDate createDate;
 
     private LocalDate expectDate;
     private LocalDate realDate;
 
-    private String orderManager;
-    private String companyOrder;
+    private Long orderManagerId;
+    private Long companyOrderId;
+
 }

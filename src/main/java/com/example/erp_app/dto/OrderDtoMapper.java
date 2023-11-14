@@ -21,9 +21,9 @@ public class OrderDtoMapper {
                 .name(order.getName())
                 .quantity(order.getQuantity())
                 .createDate(order.getCreateDate().toString())
-                .expectDays(order.getExpectDays())
-                .realDays(order.getRealDays())
-                .orderManager(order.getUser().getName() + " " + order.getUser().getSurname())
+                .expectDate(order.getExpectDate() )
+                .realDate(order.getRealDate())
+                .orderManager(order.getOrderManager().getName() + " " + order.getOrderManager().getSurname())
                 .companyOrder(order.getCompanyOrder().getName())
                 .build();
 
