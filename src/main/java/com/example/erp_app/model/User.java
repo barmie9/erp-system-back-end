@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -31,11 +30,16 @@ public class User implements UserDetails {
     @Column(name = "d_o_b")
     private LocalDate dOB;
 
+//    @Column(name = "role")
+//    private String roleStr;
+
     //private Integer privilege;
     @Enumerated(EnumType.STRING)
     private Role role; // Uprawnienia
 
-    private Long specId;
+    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+    @JoinColumn(name = "spec_id")
+    private Specialization specialization;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
