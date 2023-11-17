@@ -37,7 +37,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role; // Uprawnienia
 
-    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+//    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+    @OneToOne
     @JoinColumn(name = "spec_id")
     private Specialization specialization;
 

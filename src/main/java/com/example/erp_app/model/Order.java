@@ -25,13 +25,13 @@ public class Order {
     private LocalDate realDate;
 
     // Do sprawdzenia:
-    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
-//    @OneToOne
+//    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+    @OneToOne
     @JoinColumn(name = "order_manager_id")
     private User orderManager;
 
-    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
-//    @OneToOne
+//    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
+    @OneToOne
     @JoinColumn(name = "company_order_id")
     private CompanyOrder companyOrder;
 }

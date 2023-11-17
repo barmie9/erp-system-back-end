@@ -29,7 +29,7 @@ public class JwtService {
                 .setClaims(additionalClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 1)) // Token wygaśnie za 1h ??? do sprawdzzenia
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 72)) // Token wygaśnie za 72h ??? do sprawdzzenia
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
 
