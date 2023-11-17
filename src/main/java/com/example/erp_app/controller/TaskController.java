@@ -37,8 +37,6 @@ public class TaskController {
     public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest){
         String response = taskService.addTask(addTaskRequest);
 
-        
-
         if(response.equals("OK")){
             response = "OK - New task added";
             return ResponseEntity.ok(response);

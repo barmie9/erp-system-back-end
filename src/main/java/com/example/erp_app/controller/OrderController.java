@@ -1,5 +1,6 @@
 package com.example.erp_app.controller;
 
+import com.example.erp_app.controller.request.EditOrderRequest;
 import com.example.erp_app.dto.AddOrderRequest;
 import com.example.erp_app.dto.OrderDto;
 import com.example.erp_app.dto.OrderDtoMapper;
@@ -28,6 +29,17 @@ public class OrderController {
     public ResponseEntity<String> addOrder(@RequestBody AddOrderRequest addOrderRequest){
        String response =  orderService.addOrder(addOrderRequest);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/api/order-edit")
+    public ResponseEntity<String> editOrder(@RequestBody EditOrderRequest editOrderRequest){
+       String response =  orderService.editOrder(editOrderRequest);
+
+       if(response.equals("OK"))
+           return ResponseEntity.ok(response);
+       else
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.erp_app.service;
 
+import com.example.erp_app.controller.request.EditOrderRequest;
 import com.example.erp_app.dto.AddOrderRequest;
 import com.example.erp_app.model.CompanyOrder;
 import com.example.erp_app.model.Order;
@@ -41,5 +42,21 @@ public class OrderService {
 
         orderRepository.save(order);
         return  "OK - Do poprawy addOrder()";
+    }
+
+    public String editOrder(EditOrderRequest editOrderRequest) {
+        Order order = orderRepository.findById(editOrderRequest.getId()).orElse(null);
+        CompanyOrder companyOrder = companyOrderRepository.findById(editOrderRequest.getCompanyOrderId()).orElse(null);
+
+        if(order == null) return "ORDER NOT FOUND BY ID: " + editOrderRequest.getId().toString();
+        if(companyOrder == null) return "COMPANY NOT FOUND BY ID: " + editOrderRequest.getCompanyOrderId().toString();
+
+        order.setName(editOrderRequest.getName());
+        order.setQuantity(editOrderRequest.getQuantity());
+        order.setCompanyOrder(companyOrder);
+        order.setExpectDate(editOrderRequest.getExpectDate());
+
+        orderRepository.save(order);
+        return "OK";
     }
 }
