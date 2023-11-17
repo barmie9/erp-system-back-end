@@ -1,5 +1,6 @@
 package com.example.erp_app.controller;
 
+import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.dto.TaskDto;
 import com.example.erp_app.dto.TaskDtoMapper;
 import com.example.erp_app.model.Task;
@@ -30,6 +31,22 @@ public class TaskController {
         List<Task> tasks = taskService.getTasks(orderId);
 
         return ResponseEntity.ok(TaskDtoMapper.mapToTaskDtos(tasks));
+    }
+
+    @PostMapping("/api/add-task")
+    public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest){
+        String response = taskService.addTask(addTaskRequest);
+
+        
+
+        if(response.equals("OK")){
+            response = "OK - New task added";
+            return ResponseEntity.ok(response);
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
 }
