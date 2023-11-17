@@ -46,4 +46,8 @@ public class TaskService {
         return "OK";
 
     }
+
+    public List<Task> getUserTasks(Long userId) {
+        return taskRepository.findAllByUserId(userId).orElseThrow();
+    }
 }

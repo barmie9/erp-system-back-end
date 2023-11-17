@@ -33,6 +33,18 @@ public class TaskController {
         return ResponseEntity.ok(TaskDtoMapper.mapToTaskDtos(tasks));
     }
 
+    @PostMapping("/api/user-tasks")
+    public ResponseEntity<List<TaskDto>> getUserTasks(@RequestBody Map<String,Long> request){
+        Long userId = request.get("userId");
+
+        if (userId == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Task> tasks = taskService.getUserTasks(userId);
+
+        return ResponseEntity.ok(TaskDtoMapper.mapToTaskDtos(tasks));
+    }
+
     @PostMapping("/api/add-task")
     public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest){
         String response = taskService.addTask(addTaskRequest);
