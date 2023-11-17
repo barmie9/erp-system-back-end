@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,6 +41,20 @@ public class OrderController {
        else
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 
+    }
+
+    @PostMapping("/api/order")
+    public ResponseEntity<OrderDto> getOrder(@RequestBody Map<String,Long> request){
+
+        Long id = request.get("id");
+
+        if(id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Order order = orderService.getOrder(id);
+
+        return  ResponseEntity.ok(OrderDtoMapper.mapToOrderDto(order));
     }
 
 }

@@ -59,4 +59,8 @@ public class OrderService {
         orderRepository.save(order);
         return "OK";
     }
+
+    public Order getOrder(Long id) {
+        return orderRepository.findById(id).orElseThrow();
+    }
 }
