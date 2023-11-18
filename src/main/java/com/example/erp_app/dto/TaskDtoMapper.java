@@ -9,7 +9,7 @@ public class TaskDtoMapper {
 
     private  TaskDtoMapper(){};
 
-    private static TaskDto mapToTaskDto(Task task){
+    public static TaskDto mapToTaskDto(Task task){
         return TaskDto.builder()
                 .id(task.getId())
                 .name(task.getName())

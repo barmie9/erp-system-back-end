@@ -50,4 +50,8 @@ public class TaskService {
     public List<Task> getUserTasks(Long userId) {
         return taskRepository.findAllByUserId(userId).orElseThrow();
     }
+
+    public Task getTaskById(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow();
+    }
 }
