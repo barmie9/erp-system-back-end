@@ -11,5 +11,8 @@ import java.util.Optional;
 public interface TaskRepository extends JpaRepository<Task,Long> {
     Optional<List<Task>> findAllByOrderId(Long orderId);
 
-    Optional<List<Task>> findAllByUserId(Long userId);
+//    Optional<List<Task>> findAllByUserId(Long userId);
+
+    // Zwraca liste zadań użytkownika, posortowaną po id malejąco
+    Optional<List<Task>> findAllByUserIdOrderByIdDesc(Long userId);
 }

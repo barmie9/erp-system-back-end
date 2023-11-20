@@ -1,6 +1,7 @@
 package com.example.erp_app.service;
 
 import com.example.erp_app.controller.request.AddTaskRequest;
+import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
 import com.example.erp_app.model.Order;
 import com.example.erp_app.model.Task;
 import com.example.erp_app.model.User;
@@ -48,10 +49,20 @@ public class TaskService {
     }
 
     public List<Task> getUserTasks(Long userId) {
-        return taskRepository.findAllByUserId(userId).orElseThrow();
+//        return taskRepository.findAllByUserId(userId).orElseThrow();
+        return taskRepository.findAllByUserIdOrderByIdDesc(userId).orElseThrow();
     }
 
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId).orElseThrow();
+    }
+
+    public Task updateTaskProgress(UpdateTaskProgressRequest request) {
+        Task task = taskRepository.findById(request.getTaskId()).orElseThrow();
+        task.setProgress(request.getProgress());
+
+        taskRepository.save(task);
+
+        return task;
     }
 }
