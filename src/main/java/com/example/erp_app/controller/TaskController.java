@@ -8,9 +8,8 @@ import com.example.erp_app.model.Task;
 import com.example.erp_app.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -56,16 +55,26 @@ public class TaskController {
     }
 
     @PostMapping("/api/add-task")
-    public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest){
-        String response = taskService.addTask(addTaskRequest);
+    public ResponseEntity<Long> addTask(@RequestBody AddTaskRequest addTaskRequest){
+        Task task = taskService.addTask(addTaskRequest);
 
-        if(response.equals("OK")){
-            response = "OK - New task added";
-            return ResponseEntity.ok(response);
+        if(task == null){
+            return ResponseEntity.badRequest().body(null);
         }
         else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(task.getId());
         }
+    }
+
+    @PostMapping("/api/add-task-files")
+    public ResponseEntity<String> addTaskFiles(@RequestParam("files") List<MultipartFile> files, @RequestParam("taskId") Long taskId){
+
+        String response = taskService.addFilesToTask(files,taskId);
+
+        if(response.equals("OK"))
+            return ResponseEntity.ok("OK - DODANO PLIKI");
+        else
+            return ResponseEntity.badRequest().body(response);
     }
 
     @PostMapping("/api/update-task-progress")

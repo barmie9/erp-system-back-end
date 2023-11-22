@@ -12,8 +12,8 @@ import java.time.LocalDate;
 public class AddTaskRequest {
     private String name;
     private String descr;
-    LocalDate startDate;
-    LocalDate endDate;
-    Long userId;
-    Long orderId;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Long userId;
+    private Long orderId;
 }

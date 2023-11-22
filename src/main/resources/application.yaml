@@ -10,3 +10,9 @@ spring:
     show-sql: true # W??cz wy?wietlanie zapyta? SQL w konsoli (dobrze w trybie deweloperskim)
   database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+  # Ustawienia dla obsługi przesyłania plików
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+

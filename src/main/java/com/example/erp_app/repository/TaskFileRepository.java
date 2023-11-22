@@ -1,9 +1,10 @@
 package com.example.erp_app.repository;
 
-import com.example.erp_app.model.CompanyOrder;
+import com.example.erp_app.model.TaskFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyOrderRepository extends JpaRepository<CompanyOrder,Long> {
+public interface TaskFileRepository extends JpaRepository<TaskFile,Long> {
+
 }

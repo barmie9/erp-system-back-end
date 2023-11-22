@@ -4,12 +4,12 @@ import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
 import com.example.erp_app.model.Order;
 import com.example.erp_app.model.Task;
+import com.example.erp_app.model.TaskFile;
 import com.example.erp_app.model.User;
-import com.example.erp_app.repository.OrderRepository;
-import com.example.erp_app.repository.TaskRepository;
-import com.example.erp_app.repository.UserRepository;
+import com.example.erp_app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,16 +20,22 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+    private final TaskFileRepository taskFileRepository;
+    private final FileSystemTaskRepository fileSystemTaskRepository;
 
     public List<Task> getTasks(Long orderId){
         return taskRepository.findAllByOrderId(orderId).orElseThrow();
     }
 
-    public String addTask(AddTaskRequest addTaskRequest) {
+    public Task addTask(AddTaskRequest addTaskRequest) {
 
         // todo Do napisania obsługa przypadku gdy nie ma user lub order o danym id.
-        User user = userRepository.findById(addTaskRequest.getUserId()).orElseThrow();
-        Order order = orderRepository.findById(addTaskRequest.getOrderId()).orElseThrow();
+        User user = userRepository.findById(addTaskRequest.getUserId()).orElse(null);
+        Order order = orderRepository.findById(addTaskRequest.getOrderId()).orElse(null);
+
+        if(user==null || order==null){
+            return null;
+        }
 
         Task newTask = Task.builder()
                 .name(addTaskRequest.getName())
@@ -44,8 +50,36 @@ public class TaskService {
 
         taskRepository.save(newTask);
 
-        return "OK";
+        return newTask;
 
+    }
+
+    public String addFilesToTask(List<MultipartFile> files, Long taskId) {
+
+        Task task = taskRepository.findById(taskId).orElse(null);
+        if(task == null){
+            return "TASK NOT FOUND ID: " + taskId.toString();
+        }
+
+        for(MultipartFile file : files){
+
+            // Zapis plików w systemie plików
+            String location;
+            try{
+                location = fileSystemTaskRepository.save(file.getBytes(),file.getOriginalFilename());
+            }catch (Exception e){
+                System.out.println("SAVE FILE ERROR: " + e.getMessage());
+                return "SAVE_FILE_ERROR: " + file.getOriginalFilename(); // Zwrócenie komunikatu z błędem jeśli nie udało się zapisać pliku
+            }
+
+            // Zapis w bazie danych lokalizacji plików
+            TaskFile newTaskFile = new TaskFile();
+            newTaskFile.setLocation(location);
+            newTaskFile.setTask(task);
+            taskFileRepository.save(newTaskFile);
+        }
+
+        return "OK";
     }
 
     public List<Task> getUserTasks(Long userId) {
