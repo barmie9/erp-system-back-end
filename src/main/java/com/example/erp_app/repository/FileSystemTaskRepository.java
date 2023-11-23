@@ -1,5 +1,6 @@
 package com.example.erp_app.repository;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Repository;
 
 import java.nio.file.Files;
@@ -20,5 +21,14 @@ public class FileSystemTaskRepository {
 
         Files.write(newFile,fileContent);
         return newFile.toAbsolutePath().toString();
+    }
+
+    public FileSystemResource findInFileSystem(String location) {
+        try {
+            return new FileSystemResource(Paths.get(location));
+        } catch (Exception e) {
+            // Handle access or file not found problems.
+            throw new RuntimeException();
+        }
     }
 }

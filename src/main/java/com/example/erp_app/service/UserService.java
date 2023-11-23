@@ -1,7 +1,7 @@
 package com.example.erp_app.service;
 
 import com.example.erp_app.config.JwtService;
-import com.example.erp_app.controller.AuthenticationResponse;
+import com.example.erp_app.controller.response.AuthenticationResponse;
 import com.example.erp_app.dto.LoginRequest;
 import com.example.erp_app.dto.RegisterRequest;
 import com.example.erp_app.model.Role;

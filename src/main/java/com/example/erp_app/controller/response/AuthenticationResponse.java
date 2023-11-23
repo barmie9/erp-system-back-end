@@ -1,4 +1,4 @@
-package com.example.erp_app.controller;
+package com.example.erp_app.controller.response;
 
 import lombok.*;
 

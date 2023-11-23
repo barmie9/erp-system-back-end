@@ -8,8 +8,11 @@ import com.example.erp_app.model.TaskFile;
 import com.example.erp_app.model.User;
 import com.example.erp_app.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -75,11 +78,19 @@ public class TaskService {
             // Zapis w bazie danych lokalizacji plików
             TaskFile newTaskFile = new TaskFile();
             newTaskFile.setLocation(location);
+            newTaskFile.setName(file.getOriginalFilename());
             newTaskFile.setTask(task);
             taskFileRepository.save(newTaskFile);
         }
 
         return "OK";
+    }
+
+    public FileSystemResource find(Long fileId) {
+        TaskFile file = taskFileRepository.findById(fileId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return fileSystemTaskRepository.findInFileSystem(file.getLocation());
     }
 
     public List<Task> getUserTasks(Long userId) {

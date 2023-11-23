@@ -19,6 +19,7 @@ public class TaskFile {
     private Long id;
 
     private String location;
+    private String name;
 
     @OneToOne // Do sprawdzenia
     @JoinColumn(name = "task_id")

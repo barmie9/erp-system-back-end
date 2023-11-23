@@ -1,5 +1,6 @@
 package com.example.erp_app.controller;
 
+import com.example.erp_app.controller.response.AuthenticationResponse;
 import com.example.erp_app.dto.LoginRequest;
 import com.example.erp_app.dto.RegisterRequest;
 import com.example.erp_app.dto.UserDto;
