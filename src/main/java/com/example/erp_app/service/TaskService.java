@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -63,7 +64,7 @@ public class TaskService {
 
         Task task = taskRepository.findById(taskId).orElse(null);
         if(task == null){
-            return "TASK NOT FOUND ID: " + taskId.toString();
+            return "TASK NOT FOUND ID: " + taskId;
         }
 
         for(MultipartFile file : files){
@@ -126,5 +127,23 @@ public class TaskService {
             return taskRepository.save(task);
         }
         else return null;
+    }
+
+    public String deleteFiles(List<Long> fileIds) {
+        for(Long fileId: fileIds){
+            TaskFile taskFile = taskFileRepository.findById(fileId).orElse(null);
+            if(taskFile != null){
+                File fileToDelete = new File(taskFile.getLocation());
+                if(!fileToDelete.delete()){ // Usunięcie pliku z dysku
+                    return "ERROR - DELETE FILE ID: " + fileId;
+                }
+                else {
+                    //Usunięcie pozycji z bazy danych:
+                    taskFileRepository.delete(taskFile);
+                }
+            }
+        }
+
+        return "OK";
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,6 +120,19 @@ public class TaskController {
             return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(newTask));
         else return ResponseEntity.badRequest().build();
 
+    }
+
+    @PostMapping("/api/delete-files")
+    public ResponseEntity<String> deleteFiles(@RequestBody HashMap<String,List<Long>> request){
+
+        List<Long> fileIds = request.get("deleteFileIdList");
+
+        String response = "NO FILES TO REMOVE";
+        if(fileIds.size() > 0){
+            response = taskService.deleteFiles(fileIds);
+        }
+
+        return ResponseEntity.ok(response);
     }
 
 }
