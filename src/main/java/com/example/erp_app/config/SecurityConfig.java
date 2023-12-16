@@ -28,7 +28,7 @@ public class SecurityConfig {
                 // ------ Zezwala na reqesty z poniższych adresów ------
                 .cors().configurationSource(request -> {
                     var cors = new CorsConfiguration();
-                    cors.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:80", "http://probartek.ddns.net"));
+                    cors.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:80", "http://probartek.ddns.net:3000"));
                     cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
                     cors.setAllowedHeaders(List.of("*"));
 //                    cors.setAllowCredentials(true); // Do sprawdzenia

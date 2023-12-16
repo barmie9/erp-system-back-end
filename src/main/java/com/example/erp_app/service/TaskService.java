@@ -1,5 +1,6 @@
 package com.example.erp_app.service;
 
+//import com.example.erp_app.repository.*;
 import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
 import com.example.erp_app.model.Order;
@@ -27,7 +28,7 @@ public class TaskService {
     private final FileSystemTaskRepository fileSystemTaskRepository;
 
     public List<Task> getTasks(Long orderId){
-        return taskRepository.findAllByOrderId(orderId).orElseThrow();
+        return taskRepository.findAllByOrderIdOrderByStart(orderId).orElseThrow();
     }
 
     public Task addTask(AddTaskRequest addTaskRequest) {
