@@ -3,6 +3,7 @@ package com.example.erp_app.service;
 //import com.example.erp_app.repository.*;
 import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
+import com.example.erp_app.controller.request.UpdateTaskRequest;
 import com.example.erp_app.model.Order;
 import com.example.erp_app.model.Task;
 import com.example.erp_app.model.TaskFile;
@@ -110,5 +111,20 @@ public class TaskService {
         taskRepository.save(task);
 
         return task;
+    }
+
+    public Task updateTask(UpdateTaskRequest request) {
+        Task task = taskRepository.findById(request.getTaskId()).orElse(null);
+
+        if(task != null){
+            task.setName(request.getName());
+            task.setDescr(request.getDescr());
+            task.setStart(request.getStart());
+            task.setEnd(request.getEnd());
+            task.setProgress(request.getProgress());
+
+            return taskRepository.save(task);
+        }
+        else return null;
     }
 }

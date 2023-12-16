@@ -2,6 +2,7 @@ package com.example.erp_app.controller;
 
 import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
+import com.example.erp_app.controller.request.UpdateTaskRequest;
 import com.example.erp_app.controller.response.TaskFileResponse;
 import com.example.erp_app.dto.TaskDto;
 import com.example.erp_app.dto.TaskDtoMapper;
@@ -107,8 +108,17 @@ public class TaskController {
     @PostMapping("/api/update-task-progress")
     public ResponseEntity<TaskDto> updateTaskProgress(@RequestBody UpdateTaskProgressRequest request){
         Task task = taskService.updateTaskProgress(request);
-
         return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(task));
+    }
+
+    @PostMapping("/api/update-task")
+    public ResponseEntity<TaskDto> updateTask (@RequestBody UpdateTaskRequest request){
+        Task newTask = taskService.updateTask(request);
+
+        if(newTask != null)
+            return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(newTask));
+        else return ResponseEntity.badRequest().build();
+
     }
 
 }
