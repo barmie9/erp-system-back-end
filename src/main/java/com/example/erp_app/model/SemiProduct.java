@@ -7,16 +7,16 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 public class SemiProduct {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY) // Do sprawdzenia autoinkrementacja w insertach
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String descr;
-    private LocalDate prodDate; //to check
+    private Float quantity;
+    private String unit;
 }

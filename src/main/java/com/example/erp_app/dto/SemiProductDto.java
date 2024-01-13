@@ -9,4 +9,6 @@ public class SemiProductDto {
     String name;
     String descr;
     String prodDate;
+    Float quantity;
+    String unit;
 }
