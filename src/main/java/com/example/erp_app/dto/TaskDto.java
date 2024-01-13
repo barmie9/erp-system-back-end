@@ -21,6 +21,7 @@ public class TaskDto {
 
     private String userName;
     private String userSurname;
+    private String device;
 
 
 

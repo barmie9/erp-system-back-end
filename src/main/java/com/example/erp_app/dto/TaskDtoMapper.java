@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class TaskDtoMapper {
 
-    private  TaskDtoMapper(){};
+    private  TaskDtoMapper(){}
 
     public static TaskDto mapToTaskDto(Task task){
         return TaskDto.builder()
@@ -20,6 +20,9 @@ public class TaskDtoMapper {
                 .type(task.getType())
                 .userName(task.getUser().getName())
                 .userSurname(task.getUser().getSurname())
+                .device(task.getDevice() == null
+                        ? "brak"
+                        : task.getDevice().getName() + " - " + task.getDevice().getDescr() )
                 .build();
     }
 

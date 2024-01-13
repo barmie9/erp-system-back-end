@@ -30,7 +30,7 @@ public class TaskController {
     private final TaskFileRepository taskFileRepository;
 
     @PostMapping("/api/tasks")
-    public ResponseEntity<List<TaskDto>> getTasks (@RequestBody Map<String,Long> taskRequest){
+    public ResponseEntity<List<TaskDto>> getTasks(@RequestBody Map<String, Long> taskRequest) {
         Long orderId = taskRequest.get("orderId");
 
         if (orderId == null) {
@@ -43,16 +43,16 @@ public class TaskController {
     }
 
     @PostMapping("/api/task")
-    public ResponseEntity<TaskDto> getTask(@RequestBody Map<String,Long> request){
+    public ResponseEntity<TaskDto> getTask(@RequestBody Map<String, Long> request) {
         Long taskId = request.get("taskId");
-        if(taskId == null) return ResponseEntity.badRequest().build();
+        if (taskId == null) return ResponseEntity.badRequest().build();
 
         Task task = taskService.getTaskById(taskId);
         return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(task));
     }
 
     @PostMapping("/api/user-tasks")
-    public ResponseEntity<List<TaskDto>> getUserTasks(@RequestBody Map<String,Long> request){
+    public ResponseEntity<List<TaskDto>> getUserTasks(@RequestBody Map<String, Long> request) {
         Long userId = request.get("userId");
 
         if (userId == null) {
@@ -64,39 +64,33 @@ public class TaskController {
     }
 
     @PostMapping("/api/add-task")
-    public ResponseEntity<Long> addTask(@RequestBody AddTaskRequest addTaskRequest){
-        Task task = taskService.addTask(addTaskRequest);
+    public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest) {
+        String response = taskService.addTask(addTaskRequest);
 
-        if(task == null){
-            return ResponseEntity.badRequest().body(null);
-        }
-        else {
-            return ResponseEntity.ok(task.getId());
-        }
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/api/add-task-files")
-    public ResponseEntity<String> addTaskFiles(@RequestParam("files") List<MultipartFile> files, @RequestParam("taskId") Long taskId){
+    public ResponseEntity<String> addTaskFiles(@RequestParam("files") List<MultipartFile> files, @RequestParam("taskId") Long taskId) {
 
-        String response = taskService.addFilesToTask(files,taskId);
+        String response = taskService.addFilesToTask(files, taskId);
 
-        if(response.equals("OK"))
+        if (response.equals("OK"))
             return ResponseEntity.ok("OK - DODANO PLIKI");
         else
             return ResponseEntity.badRequest().body(response);
     }
 
     @PostMapping("/api/get-task-files-list")
-    public ResponseEntity<List<TaskFileResponse>> getTaskFilesList(@RequestBody Map<String,Long> request){
+    public ResponseEntity<List<TaskFileResponse>> getTaskFilesList(@RequestBody Map<String, Long> request) {
 
         // todo DO POPRAWY !
         Long taskId = request.get("taskId");
         List<TaskFile> taskFiles = taskFileRepository.findAllByTaskId(taskId).orElse(null);
 
-        if(taskFiles != null){
+        if (taskFiles != null) {
             return ResponseEntity.ok(TaskFileResponseMapper.mapToTaskFileResponses(taskFiles));
-        }
-        else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
     }
@@ -107,28 +101,28 @@ public class TaskController {
     }
 
     @PostMapping("/api/update-task-progress")
-    public ResponseEntity<TaskDto> updateTaskProgress(@RequestBody UpdateTaskProgressRequest request){
+    public ResponseEntity<TaskDto> updateTaskProgress(@RequestBody UpdateTaskProgressRequest request) {
         Task task = taskService.updateTaskProgress(request);
         return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(task));
     }
 
     @PostMapping("/api/update-task")
-    public ResponseEntity<TaskDto> updateTask (@RequestBody UpdateTaskRequest request){
+    public ResponseEntity<TaskDto> updateTask(@RequestBody UpdateTaskRequest request) {
         Task newTask = taskService.updateTask(request);
 
-        if(newTask != null)
+        if (newTask != null)
             return ResponseEntity.ok(TaskDtoMapper.mapToTaskDto(newTask));
         else return ResponseEntity.badRequest().build();
 
     }
 
     @PostMapping("/api/delete-files")
-    public ResponseEntity<String> deleteFiles(@RequestBody HashMap<String,List<Long>> request){
+    public ResponseEntity<String> deleteFiles(@RequestBody HashMap<String, List<Long>> request) {
 
         List<Long> fileIds = request.get("deleteFileIdList");
 
         String response = "NO FILES TO REMOVE";
-        if(fileIds.size() > 0){
+        if (fileIds.size() > 0) {
             response = taskService.deleteFiles(fileIds);
         }
 

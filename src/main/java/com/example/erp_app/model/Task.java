@@ -24,15 +24,15 @@ public class Task {
     private LocalDate end;
     private String type;
 
-//    @JsonIgnoreProperties({"hibernateLazyInitializer"})
-//    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
     @OneToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-//    @JsonIgnoreProperties({"hibernateLazyInitializer"})
-//    @OneToOne(fetch = FetchType.LAZY)  // Do sprawdzenia
     @OneToOne
-    @JoinColumn (name = "order_id")
+    @JoinColumn(name = "order_id")
     private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "device_id")
+    private Device device;
 }

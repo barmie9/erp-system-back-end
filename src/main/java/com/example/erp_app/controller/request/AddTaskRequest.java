@@ -16,4 +16,5 @@ public class AddTaskRequest {
     private LocalDate endDate;
     private Long userId;
     private Long orderId;
+    private Long deviceId;
 }
