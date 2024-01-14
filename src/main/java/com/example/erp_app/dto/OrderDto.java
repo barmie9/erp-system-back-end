@@ -20,4 +20,5 @@ public class OrderDto {
 
     private String orderManager;
     private String companyOrder;
+    private Long companyOrderId;
 }

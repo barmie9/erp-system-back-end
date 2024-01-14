@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class OrderDtoMapper {
 
-    private OrderDtoMapper(){};
+    private OrderDtoMapper(){}
 
     public static List<OrderDto> mapOrderDtos(List<Order> orders){
         return orders.stream()
@@ -24,6 +24,7 @@ public class OrderDtoMapper {
                 .expectDate(order.getExpectDate() )
                 .realDate(order.getRealDate())
                 .orderManager(order.getOrderManager().getName() + " " + order.getOrderManager().getSurname())
+                .companyOrderId(order.getCompanyOrder().getId())
                 .companyOrder(order.getCompanyOrder().getName())
                 .build();
 
