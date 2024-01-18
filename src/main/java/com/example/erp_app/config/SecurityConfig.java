@@ -18,25 +18,20 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // ------ Zezwala na reqesty z poniższych adresów ------
                 .cors().configurationSource(request -> {
                     var cors = new CorsConfiguration();
-                    cors.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:80", "http://probartek.ddns.net:3000"));
+                    cors.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:80"));
                     cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
                     cors.setAllowedHeaders(List.of("*"));
-//                    cors.setAllowCredentials(true); // Do sprawdzenia
                     return cors;
                 })
-
                 .and()
-                .csrf() // DO POPRAWY !!!!!!!!!!!!!!!!
+                .csrf()
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/auth/**")
@@ -51,6 +46,5 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
     }
 }

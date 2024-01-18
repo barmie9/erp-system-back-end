@@ -1,4 +1,4 @@
-package com.example.erp_app.dto.mapper;
+package com.example.erp_app.controller.dto.mapper;
 
 import com.example.erp_app.controller.response.TaskFileResponse;
 import com.example.erp_app.model.TaskFile;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class TaskFileResponseMapper {
 
-    private TaskFileResponseMapper(){};
+    private TaskFileResponseMapper(){}
 
 
     public static TaskFileResponse mapToTaskFileResponse(TaskFile taskFile){

@@ -1,9 +1,10 @@
 package com.example.erp_app.service;
 
 import com.example.erp_app.config.JwtService;
+import com.example.erp_app.controller.request.UpdateRoleRequest;
 import com.example.erp_app.controller.response.AuthenticationResponse;
-import com.example.erp_app.dto.LoginRequest;
-import com.example.erp_app.dto.RegisterRequest;
+import com.example.erp_app.controller.dto.LoginRequest;
+import com.example.erp_app.controller.dto.RegisterRequest;
 import com.example.erp_app.model.Role;
 import com.example.erp_app.model.Specialization;
 import com.example.erp_app.model.User;
@@ -78,6 +79,26 @@ public class UserService {
     }
 
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByOrderBySurname();
+    }
+
+    public String updateRole(UpdateRoleRequest request) {
+        User user = userRepository.findById(request.getUserId()).orElse(null);
+
+        if(user == null)
+            return "ERROR: User not found by id: " + request.getUserId();
+
+        if(request.getRole().equals("ADMIN"))
+            user.setRole(Role.ADMIN);
+        else
+            user.setRole(Role.USER);
+
+        userRepository.save(user);
+
+        return "OK";
+    }
+
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.erp_app.service;
 
 import com.example.erp_app.controller.request.UpdateSemiProductQuantityRequest;
-import com.example.erp_app.dto.SemiProductDto;
+import com.example.erp_app.controller.dto.SemiProductDto;
 import com.example.erp_app.model.SemiProduct;
 import com.example.erp_app.repository.SemiProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class SemiProductService {
     public String updateSemiProductQuantity(UpdateSemiProductQuantityRequest request) {
         SemiProduct semiProduct = semiProductRepository.findById(request.getId()).orElse(null);
 
-        if (semiProduct == null) return "semiProduct not found by id: " + request.getId();
+        if (semiProduct == null) return "ERROR: semiProduct not found by id: " + request.getId();
         else {
             semiProduct.setQuantity(request.getQuantity());
             semiProductRepository.save(semiProduct);
@@ -42,7 +42,7 @@ public class SemiProductService {
     public String deleteSemiProduct(Long id) {
         SemiProduct semiProduct = semiProductRepository.findById(id).orElse(null);
 
-        if (semiProduct == null) return "semiProduct not found by id: " + id;
+        if (semiProduct == null) return "ERROR: semiProduct not found by id: " + id;
         else {
             semiProductRepository.delete(semiProduct);
             return "OK";

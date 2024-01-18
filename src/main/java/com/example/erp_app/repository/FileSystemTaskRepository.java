@@ -12,11 +12,14 @@ import java.util.Date;
 public class FileSystemTaskRepository {
 
     // todo DO POPRAWY !!!!!!!!!!!!!!!!!!!!! (getPath() zwraca ścieżke ze znakiem ":")
+    // Zakomentowana linia kodu powinna działać poprawnie na systemie linux,
+    // gdzie domyślnie ma byc uruchomiona aplikacja
     String RESOURCES_PATH = FileSystemTaskRepository.class.getResource("/").getPath().replaceAll("/C:","");
-
+//    String RESOURCES_PATH = FileSystemTaskRepository.class.getResource("/").getPath();
 
     public String save(byte[] fileContent, String fileName) throws Exception{
         Path newFile = Paths.get(RESOURCES_PATH + new Date().getTime() + "-" + fileName);
+
         Files.createDirectories(newFile.getParent());
 
         Files.write(newFile,fileContent);

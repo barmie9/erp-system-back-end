@@ -1,7 +1,7 @@
 package com.example.erp_app.service;
 
 import com.example.erp_app.controller.request.EditOrderRequest;
-import com.example.erp_app.dto.AddOrderRequest;
+import com.example.erp_app.controller.dto.AddOrderRequest;
 import com.example.erp_app.model.CompanyOrder;
 import com.example.erp_app.model.Order;
 import com.example.erp_app.model.User;

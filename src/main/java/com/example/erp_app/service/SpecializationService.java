@@ -17,4 +17,21 @@ public class SpecializationService {
         return specializationRepository.findAll();
     }
 
+    public String addSpecialization (String name){
+        Specialization specialization= new Specialization();
+        specialization.setName(name);
+
+        specializationRepository.save(specialization);
+        return name;
+    }
+
+    public String deleteSpecialization(Long id){
+        Specialization specialization = specializationRepository.findById(id).orElse(null);
+
+        if(specialization == null) return "ERROR: specialization not found by id: "+id;
+
+        specializationRepository.delete(specialization);
+        return "OK";
+    }
+
 }

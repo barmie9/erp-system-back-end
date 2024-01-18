@@ -1,7 +1,7 @@
 package com.example.erp_app.controller;
 
 import com.example.erp_app.controller.request.UpdateSemiProductQuantityRequest;
-import com.example.erp_app.dto.SemiProductDto;
+import com.example.erp_app.controller.dto.SemiProductDto;
 import com.example.erp_app.model.SemiProduct;
 import com.example.erp_app.service.SemiProductService;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +24,9 @@ public class SemiProductController {
     }
 
     @RequestMapping(value = "/api/add-semi-product", method = RequestMethod.POST)
-    public ResponseEntity<HashMap<String, String>> addSemiProduct(@RequestBody SemiProductDto semiProductData) {
-        HashMap<String, String> response = new HashMap<>();
+    public ResponseEntity<String> addSemiProduct(@RequestBody SemiProductDto semiProductData) {
+        String response = "OK";
         semiProductService.addSemiProduct(semiProductData);
-        response.put("keyy", "valuee");
-
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

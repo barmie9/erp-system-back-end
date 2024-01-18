@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/baza_erp
+    url: jdbc:postgresql://localhost:5432/test_03
     username: myusername
     password: mypassword
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update # Mo?esz zmieni? na "create" w trybie deweloperskim, aby tworzy? tabele przy ka?dym uruchomieniu
-    show-sql: true # W??cz wy?wietlanie zapyta? SQL w konsoli (dobrze w trybie deweloperskim)
+      ddl-auto: update # Można zmienić na "create" w trybie deweloperskim, aby tworzyć tabele przy każdym uruchomieniu
+    show-sql: false # Włącz wyświetlanie zapytań SQL w konsoli na potrzeby trybu deweloperskiego (false/true)
   database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   # Ustawienia dla obsługi przesyłania plików

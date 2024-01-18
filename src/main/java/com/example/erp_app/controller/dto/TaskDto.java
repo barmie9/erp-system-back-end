@@ -1,4 +1,4 @@
-package com.example.erp_app.dto;
+package com.example.erp_app.controller.dto;
 
 
 import lombok.*;

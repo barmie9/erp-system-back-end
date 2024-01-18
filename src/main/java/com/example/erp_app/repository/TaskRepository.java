@@ -24,7 +24,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "(  (:newTaskStartDate BETWEEN e.start AND e.end OR :newTaskEndDate BETWEEN e.start AND e.end) OR " +
             "   (e.start BETWEEN :newTaskStartDate AND :newTaskEndDate " +
             "   OR e.end BETWEEN :newTaskStartDate AND :newTaskEndDate) )")
-    Optional<List<Task>> findALLByDeviceDataCollision(
+    Optional<List<Task>> findAllByDeviceDataCollision(
             @Param("deviceId") Long deviceId,
             @Param("newTaskStartDate") LocalDate newTaskStartDate,
             @Param("newTaskEndDate") LocalDate newTaskEndDate);

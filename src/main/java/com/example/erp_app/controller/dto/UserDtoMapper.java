@@ -1,4 +1,4 @@
-package com.example.erp_app.dto;
+package com.example.erp_app.controller.dto;
 
 import com.example.erp_app.model.User;
 
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class UserDtoMapper {
 
-    private UserDtoMapper(){};
+    private UserDtoMapper(){}
 
     public static UserDto mapToUserDto (User user){
         return UserDto.builder()
@@ -18,7 +18,7 @@ public class UserDtoMapper {
                 .phoneNum(user.getPhoneNum())
                 .pesel(user.getPesel())
                 .dOB(user.getDOB())
-//                .role(user.getRole())
+                .role(user.getRole().toString())
                 .specialization(user.getSpecialization().getName())
                 .build();
     }

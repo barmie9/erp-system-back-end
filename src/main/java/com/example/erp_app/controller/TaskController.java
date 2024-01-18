@@ -4,9 +4,9 @@ import com.example.erp_app.controller.request.AddTaskRequest;
 import com.example.erp_app.controller.request.UpdateTaskProgressRequest;
 import com.example.erp_app.controller.request.UpdateTaskRequest;
 import com.example.erp_app.controller.response.TaskFileResponse;
-import com.example.erp_app.dto.TaskDto;
-import com.example.erp_app.dto.TaskDtoMapper;
-import com.example.erp_app.dto.mapper.TaskFileResponseMapper;
+import com.example.erp_app.controller.dto.TaskDto;
+import com.example.erp_app.controller.dto.TaskDtoMapper;
+import com.example.erp_app.controller.dto.mapper.TaskFileResponseMapper;
 import com.example.erp_app.model.Task;
 import com.example.erp_app.model.TaskFile;
 import com.example.erp_app.repository.TaskFileRepository;
@@ -64,10 +64,8 @@ public class TaskController {
     }
 
     @PostMapping("/api/add-task")
-    public ResponseEntity<String> addTask(@RequestBody AddTaskRequest addTaskRequest) {
-        String response = taskService.addTask(addTaskRequest);
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Task> addTask(@RequestBody AddTaskRequest addTaskRequest) {
+        return ResponseEntity.ok(taskService.addTask(addTaskRequest));
     }
 
     @PostMapping("/api/add-task-files")

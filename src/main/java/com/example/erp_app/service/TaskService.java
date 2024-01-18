@@ -30,7 +30,7 @@ public class TaskService {
         return taskRepository.findAllByOrderIdOrderByStart(orderId).orElseThrow();
     }
 
-    public String addTask(AddTaskRequest addTaskRequest) {
+    public Task addTask(AddTaskRequest addTaskRequest) {
 
         User user = userRepository.findById(addTaskRequest.getUserId()).orElse(null);
         Order order = orderRepository.findById(addTaskRequest.getOrderId()).orElse(null);
@@ -40,21 +40,21 @@ public class TaskService {
         if (addTaskRequest.getDeviceId() != 0) {
             device = deviceRepository.findById(addTaskRequest.getDeviceId()).orElse(null);
 
-            if (device == null) return "Nie znaleziono urzadzenia";
+            if (device == null) return null;
 
             // Sprawdzenie czy do urządzenia w podanym czasie przypisane są inne taski
-            List<Task> collisionTasks = taskRepository.findALLByDeviceDataCollision(addTaskRequest.getDeviceId(),
+            List<Task> collisionTasks = taskRepository.findAllByDeviceDataCollision(addTaskRequest.getDeviceId(),
                     addTaskRequest.getStartDate(), addTaskRequest.getEndDate()).orElse(null);
             Integer maxPersonNum = device.getPersonNum();
             Integer taskToDeviceNum = collisionTasks.size();
 
             if (taskToDeviceNum >= maxPersonNum)
-                return "Do urządzenia przypisane sa juz zadania w wybranym czasie";
+                return null;
         }
 
 
         if (user == null || order == null) {
-            return "Nie znaleziono pracownika lub zlecenia";
+            return null;
         }
 
         Task newTask = Task.builder()
@@ -69,9 +69,9 @@ public class TaskService {
                 .device(device)
                 .build();
 
-        taskRepository.save(newTask);
 
-        return "OK";
+
+        return taskRepository.save(newTask);
 
     }
 
