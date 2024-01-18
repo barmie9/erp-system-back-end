@@ -1,6 +1,5 @@
 package com.example.erp_app.config;
 
-import com.example.erp_app.controller.dto.RegisterRequest;
 import com.example.erp_app.model.Role;
 import com.example.erp_app.model.Specialization;
 import com.example.erp_app.model.User;
@@ -48,18 +47,6 @@ public class DataInitializer implements CommandLineRunner {
 
         User user = userRepository.findByEmail("admin").orElse(null);
 
-//        if (user == null) {
-//            RegisterRequest newUser = new RegisterRequest();
-//            newUser.setName("Adam");
-//            newUser.setSurname("Kowalski");
-//            newUser.setEmail("admin");
-//            newUser.setPesel("123321122312");
-//            newUser.setPhoneNum("321939876");
-//            newUser.setPassword("admin");
-//            newUser.setDateOfBirthday("1996-05-09");
-//            newUser.setSpecId(1l);
-//            userService.register(newUser);
-//        }
 
         if (user == null) {
             User newUser = new User();
