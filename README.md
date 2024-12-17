@@ -31,6 +31,7 @@ i pracownicy będą posiadali różne interfejsy, pozwalające wykonywać im ró
 odpowiednie do stanowiska, jakie pełnią. Wszystkie istotne informacje potrzebne do działania
 aplikacji będą przechowywane na serwerze w bazie danych.
 
+
 ## Typ aplikacji:
 - back-end
 
@@ -44,13 +45,20 @@ aplikacji będą przechowywane na serwerze w bazie danych.
 - Zainstalować Java 17
 - Utworzyć baze danych PostgreSQL
 - Dodać do projektu ścieżke do Javy
-- Zaktualizować plik application.yaml, ścieżka src->main->resources o dane z bazy takie 
-jak url bazy, nazwe użytkownika oraz hasło
-
-### url: jdbc:postgresql://localhost:5432/test_03
-### username: myusername
-### password: mypassword
+- Zaktualizować plik `application.yaml`, ścieżka `src->main->resources` o dane z DB, takie 
+jak: url bazy, nazwe użytkownika oraz hasło:
+  ```yaml
+  url: jdbc:postgresql://localhost:5432/test_03
+  username: myusername
+  password: mypassword
+  ```
 
 ## Uwagi:
-### Do uruchomienia bazy danych oraz aplikacji warto użyć `Dockera`
-### Gdby występowały problemy z Javą, można spróbować na wersji Java 21
+- Brak komentarzy w kodzie na prośbę promotora
+- Do uruchomienia bazy danych oraz aplikacji warto użyć `Dockera`
+- Gdby występowały problemy z Javą, można spróbować na wersji Java 21
+- Domyślny użytkownik:
+  ```yaml
+  username: admin
+  password: admin
+  ```
